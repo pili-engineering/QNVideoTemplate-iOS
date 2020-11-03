@@ -1,0 +1,7 @@
+platform :ios, '12.0'
+inhibit_all_warnings!
+
+target 'QNVTDemo' do
+	pod 'QNVideoTemplate', :path => '../'
+	pod 'PLShortVideoKit', '3.2.1'
+end

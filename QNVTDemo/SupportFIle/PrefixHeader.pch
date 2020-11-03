@@ -1,0 +1,27 @@
+//
+//  PrefixHeader.pch
+//  QNVTDemo
+//
+//  Created by 李政勇 on 2020/9/7.
+//  Copyright © 2020 Hermes. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "UIView+Util.h"
+#import "UIImage+Util.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define SCREENSIZE [[UIScreen mainScreen] bounds].size
+#define SCREENWIDTH [[UIScreen mainScreen] bounds].size.width
+#define SCREENHEIGHT [[UIScreen mainScreen] bounds].size.height
+#define SCREENSCALE [UIScreen mainScreen].scale
+#define W_SELF __weak typeof(self) wself = self
+#define S_SELF typeof(self) sself = wself
+
+#define QNVTCOLOR(color) [UIColor colorWithRed:((0x##color & 0xFF0000)>>16)/255.0 green:((0x##color & 0x00FF00)>>8)/255.0 blue:(0x##color & 0x0000FF)/255.0 alpha:1]
+
+#endif /* PrefixHeader_pch */

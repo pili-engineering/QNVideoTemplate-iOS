@@ -1,0 +1,6 @@
+framework module QNVideoTemplate {
+  umbrella header "QNVideoTemplate.h"
+
+  export *
+  module * { export * }
+}

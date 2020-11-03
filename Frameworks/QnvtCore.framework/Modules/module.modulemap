@@ -1,0 +1,6 @@
+framework module QnvtCore {
+  umbrella header "QnvtCore.h"
+
+  export *
+  module * { export * }
+}
