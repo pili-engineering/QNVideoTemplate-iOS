@@ -31,7 +31,7 @@ QNVideoTemplate 是一款视频模板 SDK，其主要特点是可以让用户基
 
 
 
-[iOS 端技术文档](https://github.com/pili-engineering/QNVideoTemplate-iOS/blob/main/Document/QNVideoTemplate.md)
+[iOS 端技术文档](Document/QNVideoTemplate.md)
 
 
 

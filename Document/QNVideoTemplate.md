@@ -1,18 +1,38 @@
+- [1. 概述](#1-概述)
+  - [1.1. 下载地址](#11-下载地址)
+- [2. 阅读对象](#2-阅读对象)
+- [3. 总体设计](#3-总体设计)
+  - [3.1. 基本规则](#31-基本规则)
+  - [3.2. 核心接口](#32-核心接口)
+- [4. 开发准备](#4-开发准备)
+  - [4.1. 设备及系统要求](#41-设备及系统要求)
+  - [4.2. 开发环境配置](#42-开发环境配置)
+  - [4.3. 导入 SDK](#43-导入-sdk)
+  - [4.4. Podfile](#44-podfile)
+  - [4.5. 添加权限说明](#45-添加权限说明)
+- [5. 快速开始](#5-快速开始)
+  - [5.1. 设置鉴权文件路径](#51-设置鉴权文件路径)
+  - [5.2. 创建 QNVTAsset 对象](#52-创建-qnvtasset-对象)
+  - [5.3. 创建播放器](#53-创建播放器)
+  - [5.4. 替换资源](#54-替换资源)
+  - [5.5. 导出视频](#55-导出视频)
+- [6. 最佳实践](#6-最佳实践)
+
 <a id="1"></a>
-# 1 概述
+## 1. 概述
 
 QNVideoTemplate 是七牛推出的一款短视频视频模板SDK，可帮助开发者快速实现类似抖音的影集、剪映的剪同款功能。该SDK支持iOS和Android端，并且具有炫酷的视频模板供开发者参考使用。同时，该SDK允许定制个性化模板，以便给开发者及终端用户提供更多创作支持。
 
 </br>
 
 <a id="1.1"></a>
-## 1.1 下载地址
+### 1.1. 下载地址
 - [iOS Demo 以及 SDK 下载地址](https://github.com/pili-engineering/QNVideoTemplate-iOS)
 
 </br>
 
 <a id="2"></a>
-# 2 阅读对象
+## 2. 阅读对象
 
 本文档为技术文档，需要阅读者
 
@@ -22,11 +42,11 @@ QNVideoTemplate 是七牛推出的一款短视频视频模板SDK，可帮助开�
 </br>
 
 <a id="3"></a>
-# 3 总体设计
+## 3. 总体设计
 
 
 <a id="3.1"></a>
-## 3.1 基本规则
+### 3.1. 基本规则
 
 为了方便理解和使用，对于 SDK 的接口设计，我们遵循了如下的原则：
 
@@ -35,7 +55,7 @@ QNVideoTemplate 是七牛推出的一款短视频视频模板SDK，可帮助开�
 
 
 <a id="3.2"></a>
-## 3.2 核心接口
+### 3.2. 核心接口
 
 核心接口类说明如下：
 
@@ -48,17 +68,17 @@ QNVideoTemplate 是七牛推出的一款短视频视频模板SDK，可帮助开�
 </br>
 
 <a id="4"></a>
-# 4 开发准备
+## 4. 开发准备
 
 
 <a id="4.1"></a>
-## 4.1 设备及系统要求
+### 4.1. 设备及系统要求
 - 设备要求： iPhone 6 及以上机型
 - 系统要求： iOS 12 及以上系统  
   
 
 <a id="4.2"></a>
-## 4.2 开发环境配置
+### 4.2. 开发环境配置
 
 - Xcode 开发工具。App Store [下载地址](https://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12)
 - 安装 CocoaPods。[了解 CocoaPods 使用方法](https://cocoapods.org/)
@@ -69,11 +89,11 @@ QNVideoTemplate 是七牛推出的一款短视频视频模板SDK，可帮助开�
 
 
 <a id="4.3"></a>
-## 4.3 导入 SDK
+### 4.3. 导入 SDK
 
 视频的替换需要裁减、转码等前处理，这里推荐使用七牛推出的短视频SDK [PLShortVideoKit](https://github.com/pili-engineering/PLShortVideoKit)
 
-### Podfile
+### 4.4. Podfile
 
 为了使用 CoacoaPods 集成 QNVideoTemplate 到你的 Xcode 工程当中，你需要编写你的 `Podfile`
 
@@ -85,7 +105,7 @@ end
 ```
 
 <a id="4.4"></a>
-## 4.4 添加权限说明
+### 4.5. 添加权限说明
 我们需要在 Info.plist 文件中添加相应权限的说明，否则程序将会出现崩溃。需要添加如下权限：
 
 - 相册权限:&emsp;&emsp; Privacy - Photo Library Usage Description &emsp;&emsp; 是否允许 App 访问媒体资料库
@@ -93,9 +113,9 @@ end
 </br>
 
 <a id="5"></a>
-# 5 快速开始
+## 5. 快速开始
 
-### 设置鉴权文件路径
+### 5.1. 设置鉴权文件路径
 鉴权必须在调用其他接口之前
 ``` objc
 #import <QNVideoTemplate/QNVTCommon.h>
@@ -103,14 +123,14 @@ end
 NSString* path = [[NSBundle mainBundle] pathForResource:@"qnvt" ofType:@"license"];
 QNVTSetLicensePath([path UTF8String]);
 ```
-### 创建 QNVTAsset 对象
+### 5.2. 创建 QNVTAsset 对象
 模板解析比较耗时，这里推荐使用 GCD 异步创建
 ``` objc
 dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
     self.asset = [[QNVTAsset alloc] initWithPath:self.model.path];
 }
 ```
-### 创建播放器 
+### 5.3. 创建播放器 
 比较耗时，推荐异步创建
 ``` objc
 dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
@@ -147,7 +167,7 @@ dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
     });
 }
 ```
-### 替换资源
+### 5.4. 替换资源
 ``` objc
 // 这里的 property 使用 player 或 asset 接口中返回的 property， 不要自行创建，有可能丢失 pid 等关键信息
 // 文字属性只能替换 textValue, 视频图片属性可相互替换
@@ -158,7 +178,7 @@ property.value = value;
 
 [self.player setProperty:property];
 ```
-### 导出视频
+### 5.5. 导出视频
 ```objc
 QNVTMovieWriter* movieWriter = [[QNVTMovieWriter alloc] initWithAsset:self.asset videoSetting:nil];
 
@@ -183,7 +203,7 @@ QNVTVideoSetting* setting = [QNVTVideoSetting new];
 </br>
 
 <a id="6"></a>
-# 6 最佳实践
+## 6. 最佳实践
 
 - 播放器以及导出的FPS若无特殊要求建议设为 0，使用模板中预置的FPS
 - 导出视频软编同等码率下效果更好，硬编效率更高内存消耗更少，可根据需要设定，导出 2k 以上视频建议使用硬编
